@@ -1,0 +1,43 @@
+﻿@using WebApplication.Models;
+@model Cep
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Web Services</h1>
+    <p class="lead">Consultando CEP nos correios</p>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="form-group">
+                <div class="input-group">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.TextBoxFor(m => m.Codigo, new { @class = "form-control" })
+                    <span class="input-group-btn">
+                        <input type="submit" value="Buscar" class="btn btn-default" />
+                    </span>
+
+                </div>
+            </div>
+            <br />
+            <div>
+                @Html.ValidationMessageFor(m => m.Codigo, "", new { @class = "text-danger" })
+            </div>
+        }
+
+        @{
+            if (ViewBag.Endereco != null)
+            {
+                @ViewBag.Endereco.Descricao @ViewBag.Endereco.Complemento
+                <br />
+                @ViewBag.Endereco.Bairro<br />
+                @ViewBag.Endereco.Cidade<br />
+                @ViewBag.Endereco.UF<br />
+            }
+        }
+    </div>
+</div>
